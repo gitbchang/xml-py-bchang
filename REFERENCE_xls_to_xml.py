@@ -40,7 +40,6 @@ header_string = ('<?xml version="1.0" encoding="utf-8" ?>' + '\n' +
 product_string_array = ['  <Products>' + '\n']
 
 # columns. App needs to set these based on the dropdown selections.
-# xxx - clarify how columns are set
 product_id_index = 0
 product_name_index = 1
 product_locale_names = None
