@@ -1,6 +1,7 @@
 import csv
 import xlrd
 from datetime import datetime
+from math import ceil as roundup
 from re import sub
 
 from lxml import etree
@@ -8,17 +9,17 @@ from lxml import objectify
 
 start = datetime.now()
 time = start.strftime('%Y-%m-%dT%H:%M:%S.%f')
-client_instance = 'testing'
+client_instance = 'bc-tutorial'
 
-file_path = 'edit_bchang_catalog.xls'
+file_path = 'edit_bchang_catalog_noclient.xls'
 workbook = xlrd.open_workbook(file_path)
 sheet = workbook.sheet_by_index(0)
 delimiter_main, delimiter_sub = ',', ';'
 
-# broken_gtins = 'TESTING_broken_gtins.csv'
-# broken_gtins = open(broken_gtins, 'w', encoding='utf-8')
-# broken_gtins = csv.writer(broken_gtins)
-# broken_gtins.writerow(['ProductId','GTIN','Problem'])
+broken_gtins = 'bc-tutorial_broken_gtins.csv'
+broken_gtins = open(broken_gtins, 'w', encoding='utf-8')
+broken_gtins = csv.writer(broken_gtins)
+broken_gtins.writerow(['ProductId','GTIN','Problem'])
 
 """
 **SET COLUMN START**
@@ -57,7 +58,7 @@ custom_attributes = None
 
 header_string = '<?xml version="1.0" encoding="utf-8" ?>' + '\n'
 f = objectify.E
-# xfeed = objectify.Element("Feed",xmlns="http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6", name="coty-inc", incremental="false", encoding="utf-8", extractDate="2017-04-2T05:17:33.945-06:00")
+xfeed = objectify.Element("Feed",xmlns="http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6", name="coty-inc", incremental="false", encoding="utf-8", extractDate=time)
 
 """
 ** VALIDATE AND CLEAN FUNCTIONS START **
@@ -92,7 +93,7 @@ def xml_clean(element_string):
 		element_string = element_string[1:]
 	return element_string
 
-def validate_eans(product_id, eans, product_string, broken_gtins):
+def validate_eans(product_id, eans, broken_gtins):
 	valid_eans = []
 	for ean in eans:
 		if len(ean) in (8, 13):
@@ -138,13 +139,14 @@ def validate_eans(product_id, eans, product_string, broken_gtins):
 			broken_gtins.writerow([product_id, ean,'EAN: Invalid Length'])
 	
 	if len(valid_eans) >= 1:
-		product_string_array.append('      ' + '<EANs>' + '\n')
-		for ean in valid_eans:
-			product_string_array.append('        ' + '<EAN>' + ean + '</EAN>' + '\n')
-		product_string_array.append('      ' + '</EANs>' + '\n')
+		x_eans = objectify.SubElement(x_Product, 'EANs')
+		# product_string_array.append('      ' + '<EANs>' + '\n')
+		for index, ean in enumerate(valid_eans):
+			x_ean = objectify.SubElement(x_eans, 'EAN')
+			x_ean[index] = ean
 
 # xls validate
-def validate_upcs(product_id, upcs, product_string_array, broken_gtins, broken_gtin_count):
+def validate_upcs(product_id, upcs, broken_gtins, broken_gtin_count):
 	valid_upcs = []
 	for upc in upcs:
 		if len(upc) in (6, 12):
@@ -187,10 +189,13 @@ def validate_upcs(product_id, upcs, product_string_array, broken_gtins, broken_g
 			broken_gtin_count += 1
 
 	if len(valid_upcs) >= 1:
-		product_string_array.append('      ' + '<UPCs>' + '\n')
+		x_upcs = objectify.SubElement(x_Product, "UPCs")
+		# product_string_array.append('      ' + '<UPCs>' + '\n')
 		for upc in valid_upcs:
-			product_string_array.append('        ' + '<UPC>' + upc + '</UPC>' + '\n')
-		product_string_array.append('      ' + '</UPCs>' + '\n')
+			objectify.SubElement(x_upcs, "UPC")
+			x_upcs.UPC = upc
+		# 	product_string_array.append('        ' + '<UPC>' + upc + '</UPC>' + '\n')
+		# product_string_array.append('      ' + '</UPCs>' + '\n')
 	print(broken_gtin_count)
 	return broken_gtin_count
 """
@@ -203,10 +208,10 @@ def validate_upcs(product_id, upcs, product_string_array, broken_gtins, broken_g
 broken_gtin_count = 0
 urls = []
 row_number = 0
-x_Products = objectify.Element('Products')
+x_Products = objectify.SubElement(xfeed, 'Products')
 for row in range(1, sheet.nrows):
 	if sheet.cell(row, product_id_index).value != '':
-		x_product = objectify.Element('Product')
+		x_Product = objectify.SubElement(x_Products, 'Product')
 		if type(sheet.cell(row, product_id_index).value) == str:
 			product_id = sheet.cell(row,product_id_index).value
 		if type(sheet.cell(row, product_id_index).value) == float:
@@ -214,74 +219,80 @@ for row in range(1, sheet.nrows):
 		else:
 			pass
 		
-		x_product.append(objectify.Element("ExternalId"))
-		xProduct = ptree.Product(
-			ptree.ExternalId(id_clean(product_id))
-		)
-		
+		objectify.SubElement(x_Product, 'ExternalId')
+		product_id = id_clean(product_id)
+		x_Product.ExternalId = product_id
+
 		if product_name_index is not None:
 			product_name = str(sheet.cell(row, product_name_index).value)
 			if product_name != '':
-				product_name = xml_clean(product_name)
-				product_string_array.append('      ' + '<Name>' + product_name + '</Name>' + '\n')
+				objectify.SubElement(x_Product, 'Name')
+				clean_name = xml_clean(product_name)
+				x_Product.Name = clean_name
 
 		if product_description_index is not None:
 			product_description = str(sheet.cell(row, product_description_index).value)
 			if product_description != '':
+				objectify.SubElement(x_Product, 'Description')
 				product_description = xml_clean(product_description)
-				product_string_array.append('      ' + '<Description>' + product_description + '</Description>' + '\n')
+				x_Product.Description = product_description
 		
 		# product_locale_names = xml_clean(row[product_locale_names])
 
 		if brand_id_index is not None:
 			brand_id = sheet.cell(row, brand_id_index).value
 			if brand_id != '':
+				objectify.SubElement(x_Product, 'BrandExternalId')
 				brand_id = id_clean(brand_id)
-				product_string_array.append('      ' + '<BrandExternalId>' + brand_id + '</BrandExternalId>' + '\n')
+				x_Product.BrandExternalId = brand_id
 
 		if brand_name_index is not None:
 			brand_name = sheet.cell(row, brand_name_index).value
 			if brand_name != '':
+				brand_outer = objectify.SubElement(x_Product, "Brand")
+				objectify.SubElement(brand_outer, "Name")
 				brand_name = xml_clean(brand_name)
-				product_string_array.append('      ' + '<Brand>' + '\n')
-				product_string_array.append('        ' + '<Name>' + brand_name + '</Name>' + '\n')
-				product_string_array.append('      ' + '</Brand>' + '\n')
+				brand_outer.Name = brand_name
 
 		if category_id_index is not None:
 			category_id = sheet.cell(row, category_id_index).value
 			if category_id != '':
+				objectify.SubElement(x_Product, 'CategoryExternalId')
 				category_id = id_clean(category_id)
-				product_string_array.append('      ' + '<CategoryExternalId>' + category_id + '</CategoryExternalId>' + '\n')
+				x_Product.CategoryExternalId = category_id
 		
 		if category_name_index is not None:
 			category_name = sheet.cell(row, category_name_index).value
 			if category_name != '':
-				product_string_array.append('      ' + '<CategoryPath>' + '\n')
+				cat_path = objectify.SubElement(x_Product, 'CategoryPath')
+				# product_string_array.append('      ' + '<CategoryPath>' + '\n')
 		
 				if delimiter_sub in category_name:
 					categories = category_name.split(delimiter_sub)
 					for category in categories:
+						objectify.SubElement(cat_path, 'CategoryName')
 						category = xml_clean(category)
-						product_string_array.append('        ' + '<CategoryName>' + category + '</CategoryName>' + '\n')
+						cat_path.CategoryName = category
 				
 				else:
+					objectify.SubElement(cat_path, 'CategoryName')
 					category = xml_clean(category_name)
-					product_string_array.append('        ' + '<CategoryName>' + category + '</CategoryName>' + '\n')
-				
-				product_string_array.append('      ' + '</CategoryPath>' + '\n')
+					cat_path.CategoryName = category
 
 		if product_page_url_index is not None:
 			product_page_url = sheet.cell(row, product_page_url_index).value
 			if product_page_url != '':
+				objectify.SubElement(x_Product, "ProductPageUrl")
 				product_page_url = xml_clean(product_page_url)
-				product_string_array.append('      ' + '<ProductPageUrl>' + product_page_url + '</ProductPageUrl>' + '\n')
+				x_Product.ProductPageUrl = product_page_url
 			# locale_product_page_urls = row[locale_product_page_urls]
 
 		if image_url_index is not None:
 			image_url = sheet.cell(row, image_url_index).value
 			if image_url != '':
+				objectify.SubElement(x_Product, "ImageUrl")
 				image_url = xml_clean(image_url)
-				product_string_array.append('      ' + '<ImageUrl>' + image_url + '</ImageUrl>' + '\n')
+				x_Product.ImageUrl = image_url
 			# locale_image_urls = row[locale_image_urls]
 		
 		if upcs_index is not None:
@@ -293,7 +304,7 @@ for row in range(1, sheet.nrows):
 					upcs = upcs.split(delimiter_sub)
 				else:
 					upcs = [str(upcs)]
-				broken_gtin_count = validate_upcs(product_id, upcs, product_string_array, broken_gtins, broken_gtin_count)
+				broken_gtin_count = validate_upcs(product_id, upcs, broken_gtins, broken_gtin_count)
 			else:
 				broken_gtins.writerow([product_id, upcs, 'UPC: Missing UPC'])
 				broken_gtin_count +=1
@@ -307,7 +318,7 @@ for row in range(1, sheet.nrows):
 					eans = eans.split(delimiter_main)
 				else:
 					eans = [str(eans)]
-				validate_eans(product_id, eans, product_string_array, broken_gtins)
+				validate_eans(product_id, eans, broken_gtins)
 			else:
 				broken_gtins.writerow([product_id, eans, 'EAN: Missing EAN'])
 				broken_gtin_count +=1
@@ -392,24 +403,6 @@ for row in range(1, sheet.nrows):
 """
 ** END READING ROWS **
 """
-
-
-
-
-
-
-
-x_products = objectify.Element("Products")
-x_categories = objectify.Element("Categories")
-
-x_product = objectify.SubElement(x_products, "Product")
-x_product.append(objectify.Element('ExternalId'))
-x_product.append(objectify.Element('Name'))
-x_product.append(objectify.Element('Description'))
-
-
-x_products.append(x_product)
-xfeed.append(x_products)
 
 objectify.deannotate(xfeed, cleanup_namespaces=True)
 newxml = etree.tostring(xfeed, pretty_print=True)

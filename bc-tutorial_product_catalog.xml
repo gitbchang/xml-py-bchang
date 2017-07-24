@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Feed encoding="utf-8" extractDate="2017-07-24T13:43:03.479118" incremental="false" name="coty-inc" xmlns="http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6">
+  <Products>
+    <Product>
+      <ExternalId>ID-1</ExternalId>
+      <Name>Bottega Veneta Pour Homme Eau de Parfum</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Bottega Veneta</Name>
+      </Brand>
+      <UPCs>
+        <UPC>072993022000</UPC>
+      </UPCs>
+      <EANs>
+        <EAN>3614222107743</EAN>
+        <EAN>3614222107781</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-2</ExternalId>
+      <Name>Bottega Veneta Signature</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Bottega Veneta</Name>
+      </Brand>
+      <EANs>
+        <EAN>3607342250628</EAN>
+        <EAN>3607342250666</EAN>
+        <EAN>3607342250826</EAN>
+        <EAN>3607342703797</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-3</ExternalId>
+      <Name>Love, Chlo&#233;  (supposed to have been Chloe Love Story)</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Chlo&#233;</Name>
+      </Brand>
+      <EANs>
+        <EAN>3607340205491</EAN>
+        <EAN>3607340205538</EAN>
+        <EAN>3607340205699</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-4</ExternalId>
+      <Name>Chlo&#233; Signature</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Chlo&#233;</Name>
+      </Brand>
+      <EANs>
+        <EAN>0688575201901</EAN>
+        <EAN>3614222864677</EAN>
+        <EAN>3607346232347</EAN>
+        <EAN>3607346232385</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-5</ExternalId>
+      <Name>CK One</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Calvin Klein</Name>
+      </Brand>
+      <UPCs>
+        <UPC>065607680000</UPC>
+      </UPCs>
+      <EANs>
+        <EAN>0088300607686</EAN>
+        <EAN>0088300607402</EAN>
+        <EAN>0088300607433</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-6</ExternalId>
+      <Name>Davidoff Cool Water</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Davidoff</Name>
+      </Brand>
+      <EANs>
+        <EAN>3414202000510</EAN>
+        <EAN>3414202000565</EAN>
+        <EAN>3414202000572</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-7</ExternalId>
+      <Name>Joop! Homme</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Joop!</Name>
+      </Brand>
+      <EANs>
+        <EAN>3414206000592</EAN>
+        <EAN>3414206000608</EAN>
+        <EAN>3607345809915</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-8</ExternalId>
+      <Name>Joop! WOW!</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Joop!</Name>
+      </Brand>
+      <EANs>
+        <EAN>3614222571667</EAN>
+        <EAN>3614222571704</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-9</ExternalId>
+      <Name>Marc Jacobs Daisy</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Marc Jacobs</Name>
+      </Brand>
+      <EANs>
+        <EAN>0031655513027</EAN>
+        <EAN>0031655513010</EAN>
+        <EAN>0031655513034</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-10</ExternalId>
+      <Name>Marc Jacobs Daisy Dream</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Marc Jacobs</Name>
+      </Brand>
+      <UPCs>
+        <UPC>058475333000</UPC>
+      </UPCs>
+      <EANs>
+        <EAN>3607349764326</EAN>
+        <EAN>3607349764289</EAN>
+        <EAN>3607349764241</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-11</ExternalId>
+      <Name>Marc Jacobs Daisy Eau So Fresh</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Marc Jacobs</Name>
+      </Brand>
+      <EANs>
+        <EAN>3607342291300</EAN>
+        <EAN>3607342221161</EAN>
+        <EAN>3607342221208</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-12</ExternalId>
+      <Name>Marc Jacobs Decadence</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Marc Jacobs</Name>
+      </Brand>
+      <EANs>
+        <EAN>3614221235041</EAN>
+        <EAN>3614221235164</EAN>
+        <EAN>3614221234969</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-13</ExternalId>
+      <Name>Miu Miu L'Eau Bleu</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Miu Miu</Name>
+      </Brand>
+      <EANs>
+        <EAN>3614222169192</EAN>
+        <EAN>3614223166206</EAN>
+        <EAN>3614223480258</EAN>
+        <EAN>3614222531586</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-14</ExternalId>
+      <Name>Miu Miu Original</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Miu Miu</Name>
+      </Brand>
+      <EANs>
+        <EAN>3614220322254</EAN>
+        <EAN>3614223166169</EAN>
+        <EAN>3614223480258</EAN>
+        <EAN>3614220322452</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-15</ExternalId>
+      <Name>Lacoste Eau de Lacoste L.12.12 Magnetic For Her</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Lacoste</Name>
+      </Brand>
+      <EANs>
+        <EAN>8005610266435</EAN>
+        <EAN>8005610266398</EAN>
+        <EAN>8005610266473</EAN>
+        <EAN>8005610266558</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-16</ExternalId>
+      <Name>Lacoste Eau de Lacoste L.12.12 Magnetic For Him</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Lacoste</Name>
+      </Brand>
+      <EANs>
+        <EAN>8005610266794</EAN>
+        <EAN>8005610266831</EAN>
+        <EAN>8005610266879</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-17</ExternalId>
+      <Name>AMQ L'Eau Blanche</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>Alexander McQueen</Name>
+      </Brand>
+      <UPCs>
+        <UPC>000082471538</UPC>
+      </UPCs>
+      <EANs>
+        <EAN>8005610508443</EAN>
+        <EAN>8005610508481</EAN>
+        <EAN>8005610503684</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-18</ExternalId>
+      <Name>BOSS Bottled Tonic</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>HUGO BOSS</Name>
+      </Brand>
+      <UPCs>
+        <UPC>000082463670</UPC>
+      </UPCs>
+      <EANs>
+        <EAN>8005610255613</EAN>
+        <EAN>8005610255668</EAN>
+        <EAN>8005610365916</EAN>
+      </EANs>
+    </Product>
+    <Product>
+      <ExternalId>ID-19</ExternalId>
+      <Name>HUGO Iced</Name>
+      <Description>Fragrance</Description>
+      <Brand>
+        <Name>HUGO BOSS</Name>
+      </Brand>
+      <EANs>
+        <EAN>8005610261973</EAN>
+        <EAN>8005610262000</EAN>
+        <EAN>8005610472454</EAN>
+      </EANs>
+    </Product>
+  </Products>
+</Feed>

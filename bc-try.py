@@ -6,12 +6,22 @@ from re import sub
 from lxml import etree
 from lxml import objectify
 
-
 start = datetime.now()
 time = start.strftime('%Y-%m-%dT%H:%M:%S.%f')
-client_instance = 'test2'
+client_instance = 'bc-try'
+
+Feed = objectify.Element('Feed')
+xProducts = objectify.Element('Products')
+xProduct = objectify.Element('Product')
+
+objectify.SubElement(xProduct, 'Name')
+xProduct.Name = 'BCHANG'
 
 
+
+
+
+"""
 # initial object for E-factory tree generation
 p = objectify.E
 f = objectify.E
@@ -35,6 +45,11 @@ Products = ps.Products(
 Feed = f.Feed(
   Products
 )
+"""
+
+
+xProducts.append(xProduct)
+Feed.append(xProducts)
 
 Feed.set("xmlns", "http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6")
 Feed.set("name", client_instance)
