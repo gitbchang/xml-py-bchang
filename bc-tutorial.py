@@ -3,9 +3,7 @@ import xlrd
 from datetime import datetime
 from math import ceil as roundup
 from re import sub
-
-from lxml import etree
-from lxml import objectify
+from lxml import etree, objectify
 
 start = datetime.now()
 time = start.strftime('%Y-%m-%dT%H:%M:%S.%f')
@@ -56,9 +54,9 @@ custom_attributes = None
 **SET COLUMN END**
 """
 
-header_string = '<?xml version="1.0" encoding="utf-8" ?>' + '\n'
+header_string = '<?xml version="1.0" encoding="UTF-8" ?>' + '\n'
 f = objectify.E
-xfeed = objectify.Element("Feed",xmlns="http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6", name="coty-inc", incremental="false", encoding="utf-8", extractDate=time)
+xfeed = objectify.Element("Feed",xmlns="http://www.bazaarvoice.com/xs/PRR/ProductFeed/5.6", name="coty-inc", incremental="false", extractDate=time)
 
 """
 ** VALIDATE AND CLEAN FUNCTIONS START **
@@ -408,7 +406,7 @@ objectify.deannotate(xfeed, cleanup_namespaces=True)
 newxml = etree.tostring(xfeed, pretty_print=True)
 
 xml_path = client_instance+'_product_catalog.xml'
-xml_file = open(xml_path, 'w', encoding='utf-8')
+xml_file = open(xml_path, 'w', encoding='UTF-8')
 xml_file.write(header_string)
 xml_file.close()
 
